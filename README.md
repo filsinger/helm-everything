@@ -1,7 +1,6 @@
 # helm-everything.el
-===============
 
-[Helm](https://github.com/emacs-helm/helm) interface for [Voidtools Everything search engine](http://www.voidtools.com)
+helm-everything.el is a [Helm](https://github.com/emacs-helm/helm) interface for [Voidtools Everything search engine](http://www.voidtools.com)
 
 ## Requirements
 * [helm](https://github.com/emacs-helm/helm) 1.0 or higher
