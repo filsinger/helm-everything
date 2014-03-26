@@ -68,7 +68,9 @@
 (defun helm-everything ()
   "Search Everything with helm"
   (interactive)
-  (helm :sources '(helm-source-everything)))
+  (let ((debug-on-error 't))
+    (helm :sources '(helm-source-everything)))
+  )
 
 ;;;###autoload
 (defalias 'everything 'helm-everything)
