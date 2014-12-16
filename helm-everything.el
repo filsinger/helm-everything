@@ -28,18 +28,19 @@
     (action . helm-everything-find-file)))
 
 (defun everything-search (query &optional count)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       (concat
-        helm-everything-host "/?json=1&path_column=1"
-        (when helm-everything-regex "&regex=1")
-        (when helm-everything-maxcount (format "&count=%i" helm-everything-maxcount))
-        (when (eq helm-everything-case 1) "&case=1")
-        "&search=" (url-hexify-string query)))
+  (let ((debug-on-error t)
+            (everything-url (concat
+                    helm-everything-host "/?json=1&path_column=1"
+                    (when helm-everything-regex "&regex=1")
+                    (when helm-everything-maxcount (format "&count=%i" helm-everything-maxcount))
+                    (when (eq helm-everything-case 1) "&case=1")
+                    "&search=" (url-hexify-string query))))
+    (with-current-buffer
+        (url-retrieve-synchronously everything-url)
     (beginning-of-buffer)
     (forward-paragraph 1)
     (forward-line 1)
-    (json-read-object)))
+    (json-read-object))))
 
 (defun helm-format-results-all (result)
   (concat (cdr (assoc 'path result)) "\\" (cdr (assoc 'name result))))
